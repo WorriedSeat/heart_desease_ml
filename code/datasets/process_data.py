@@ -43,7 +43,7 @@ class Data_Processor:
         os.makedirs(self.processed_path, exist_ok=True)
         if not os.path.exists(self.raw_path / self.filename):
             url_data = pd.read_csv(self.url, names=self.columns, na_values='?')
-            url_data.to_csv(self.raw_path / self.filename) 
+            url_data.to_csv(self.raw_path / self.filename, index=False) 
         
         data = pd.read_csv(self.raw_path / self.filename)
         
