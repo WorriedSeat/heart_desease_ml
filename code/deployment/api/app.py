@@ -6,10 +6,17 @@ import pandas as pd
 
 # Load the trained model
 try:
-    base_path = Path(__file__).resolve().parents[3]
-    model = joblib.load(base_path / "models" / "logreg_model.pkl")
-    scaler = joblib.load(base_path / "models" / "standard_scaler.pkl")
-    encoder = joblib.load(base_path / "models" / "ohe.pkl")
+    #Docker
+    model = joblib.load("/app/models/logreg_model.pkl")
+    scaler = joblib.load("/app/models/standard_scaler.pkl")
+    encoder = joblib.load("/app/models/ohe.pkl")
+    
+    #localhost
+    # base_path = Path(__file__).resolve().parents[3]
+    # model = joblib.load(base_path / "models" / "logreg_model.pkl")
+    # scaler = joblib.load(base_path / "models" / "standard_scaler.pkl")
+    # encoder = joblib.load(base_path / "models" / "ohe.pkl")
+
 except Exception as e:
     raise(f"Failed to load the models: {e}")
 
@@ -37,13 +44,13 @@ class HeartDiseaseInput(BaseModel):
 def predict(input: HeartDiseaseInput):
     ohe_columns = ['cp', 'restecg', 'slope', 'thal']
     numeric_columns = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
-    
-    data = pd.DataFrame([input.model_dump()])
+
+    data = pd.DataFrame([input.model_dump(mode='python')])
     
     for item in data.columns:
         if data[item].isnull().any():
             raise HTTPException(status_code=400, detail=f"Missed value for {item}")
-        
+    
     # Encoding categorical features
     data_encoded = pd.concat(
         [
@@ -63,4 +70,4 @@ def predict(input: HeartDiseaseInput):
     )
     
     prediction = model.predict(data_prep)
-    return {"prediction": prediction[0]}
+    return {"prediction": int(prediction[0])}
