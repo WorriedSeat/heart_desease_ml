@@ -11,11 +11,11 @@ all the information about the columns etc. were extracted from: https://archive.
 Columns:
     age - feature numeric
     sex - feature categorical (0-female, 1-male)
-    cp - feature categorical (1-typical angina, 2-atypical angina, 3-nin-anginal pain, 4-asymptomatic)
+    cp - feature categorical (1-typical angina, 2-atypical angina, 3-non-anginal pain, 4-asymptomatic)
     trestbps - feature numeric
     chol - feature numeric
     fbs - feature categorical (1- >=120mg/dl, 0- <120mg/dl)
-    restecg - feature categorical (0-normal, 1-wave abnormability)
+    restecg - feature categorical (0-normal, 1-wave abnormability, 2-left ventricular hypertrophy)
     thalach - feature numeric
     exang - feature categorical (1-yes, 0-no)
     oldpeak - feature numeric

@@ -7,9 +7,9 @@ import pandas as pd
 # Load the trained model
 try:
     base_path = Path(__file__).resolve().parents[3]
-    model = joblib.load(base_path / "models" / "heart_model.pkl")
-    scaler = joblib.load(base_path / "models" / "scaler.pkl")
-    encoder = joblib.load(base_path / "models" / "encoder.pkl")
+    model = joblib.load(base_path / "models" / "logreg_model.pkl")
+    scaler = joblib.load(base_path / "models" / "standard_scaler.pkl")
+    encoder = joblib.load(base_path / "models" / "ohe.pkl")
 except Exception as e:
     raise(f"Failed to load the models: {e}")
 
