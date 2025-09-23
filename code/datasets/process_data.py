@@ -22,7 +22,7 @@ Columns:
     slope - feature categorical (1-upsloping, 2-flat, 3-downsloping)
     ca - feature numeric
     thal - feature categorical (3-normal, 6-fixed defect, 7-reversable defect)
-    num - target numeric
+    target - target numeric
 '''
 
 class Data_Processor:
