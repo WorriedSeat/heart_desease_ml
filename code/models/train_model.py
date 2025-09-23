@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score
 from pathlib import Path
@@ -15,32 +14,6 @@ class Model_trainer:
         self.train_path = self.base_path / "data" / "processed" / "cleveland_train.csv" 
         self.test_path = self.base_path / "data" / "processed" / "cleveland_test.csv"
         self.model_path = self.base_path / "models"
-        
-        
-    def encode_ohe(self, data: pd.DataFrame):
-        ohe = OneHotEncoder(sparse_output=False, handle_unknown='ignore')    
-        ohe.fit(data[self.ohe_columns])
-
-        encoded_data = ohe.transform(data[self.ohe_columns])
-        encoded_df = pd.DataFrame(encoded_data, columns=ohe.get_feature_names_out(self.ohe_columns))
-
-        result_data = data.drop(self.ohe_columns, axis=1)
-        result_data = pd.concat([result_data, encoded_df], axis=1)
-        
-        return result_data
-
-    def scale_numeric(self, data: pd.DataFrame):
-        
-        scaler = StandardScaler()
-        scaler.fit(data[self.numeric_columns])
-
-        scaled_data = scaler.transform(data[self.numeric_columns])
-        scaled_df = pd.DataFrame(scaled_data, columns=self.numeric_columns)
-
-        result_data = data.drop(self.numeric_columns, axis=1)
-        result_data = pd.concat([result_data, scaled_df], axis=1)
-        
-        return result_data
     
     def train(self):
         try:
