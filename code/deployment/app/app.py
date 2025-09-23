@@ -2,11 +2,14 @@ import streamlit as st
 import requests
 
 # FastAPI endpoint
-#FASTAPI_URL = "http://0.0.0.0:8000/predict" #localhost
+# FASTAPI_URL = "http://0.0.0.0:8000/predict" #localhost
 FASTAPI_URL = "http://fastapi:8000/predict" #Docker
 
 # Streamlit app UI
 st.title("Heart disease Identificator")
+st.write("This app will help you identify the risk of having the heart disease.")
+st.write("It's based on Logistic Regression model and Clevelend dataset from https://archive.ics.uci.edu/dataset/45/heart+disease.")
+
 
 # Input fields
 age = float(st.number_input("Age", min_value=0, max_value=130, value=70))
